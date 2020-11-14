@@ -43,50 +43,7 @@ void printSolution()
     }
 }
 
-string getCurrentDirectory(){
 
-   char buff[1024]; //create string buffer to hold path
-   GetCurrentDir( buff, FILENAME_MAX );
-   string current_working_dir(buff);
-   return current_working_dir;
-        
-}
-
-void initializeBlocks(int fileNumber){
-    
-    string currentDirectory = getCurrentDirectory() + "/b" + to_string(NUMBER_OF_BLOCKS);
-    
-    string currentFile = currentDirectory + "_" + to_string(fileNumber) + ".txt";
-    
-    ifstream file;
-
-    file.open(currentFile);
-    if (!file) {
-        cerr << "Unable to open file : " << currentFile << endl;
-        exit(1);   // call system to stop
-    }else {
-        int x; 
-        int y;
-        int z;
-
-        int blockNumber = 0;
-
-        while (file >> x >> y >> z)
-	    {
-
-            Box tempBlock = {x , y, z}; 
-
-            rot[blockNumber] = tempBlock;
-            
-            blockNumber++;
-	    }
-
-        file.close();
-        return; 
-    }
-
-
-}
 
 
 int generateRandomNumber(int min, int max)
@@ -376,27 +333,27 @@ void printSolutionStar(){
     }
 }
 
-int main(int argc, char *argv[])
-{
+// int main(int argc, char *argv[])
+// {
 
-    // candidates.insert(candidates.begin(), (Box){5, 5, 5});
+//     // candidates.insert(candidates.begin(), (Box){5, 5, 5});
 
-    // solution.insert(solution.begin(), (Box){5, 4, 5});
-    // solution.insert(solution.begin(), (Box){6, 6, 6});
-    // solution.insert(solution.begin(), (Box){8, 8, 8});
+//     // solution.insert(solution.begin(), (Box){5, 4, 5});
+//     // solution.insert(solution.begin(), (Box){6, 6, 6});
+//     // solution.insert(solution.begin(), (Box){8, 8, 8});
 
-    initializeBlocks(8);
+//     initializeBlocks(8);
 
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
-    tabooSearch();
+//     high_resolution_clock::time_point t1 = high_resolution_clock::now();
+//     tabooSearch();
 
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    duration<double> time_span = duration_cast<duration<double> >(t2 - t1);
+//     high_resolution_clock::time_point t2 = high_resolution_clock::now();
+//     duration<double> time_span = duration_cast<duration<double> >(t2 - t1);
     
-    std::cout << "It took me " << time_span.count() << " seconds.";
-    std::cout << std::endl;
+//     std::cout << "It took me " << time_span.count() << " seconds.";
+//     std::cout << std::endl;
 
-    cout << "HEIGHT  : " << calculateHeight(solutionsStar) << endl;
+//     cout << "HEIGHT  : " << calculateHeight(solutionsStar) << endl;
     
 
 
@@ -408,45 +365,45 @@ int main(int argc, char *argv[])
 
 
 
-    //Box firstCandidate = {}
-    // initializeTabooSearch();
+//     //Box firstCandidate = {}
+//     // initializeTabooSearch();
 
-    // cout << "CANDIDATES : " << endl;
+//     // cout << "CANDIDATES : " << endl;
 
-    // printCandidates();
+//     // printCandidates();
 
-    // cout << "SOLUTION : " << endl;
+//     // cout << "SOLUTION : " << endl;
 
-    // printSolution();
+//     // printSolution();
 
-    // totalHeight = calculateHeight(solution);
+//     // totalHeight = calculateHeight(solution);
 
-    // cout << "TOTAL HEIGHT : " << totalHeight << endl;
+//     // cout << "TOTAL HEIGHT : " << totalHeight << endl;
 
-    // list<Box>::iterator iter = findCandidate();
+//     // list<Box>::iterator iter = findCandidate();
 
     
 
-    // cout << "CANDIDATE : "
-    //      << " Height : " << iter->h << " Width : " << iter->w << " Depth : " << iter->d << endl;
+//     // cout << "CANDIDATE : "
+//     //      << " Height : " << iter->h << " Width : " << iter->w << " Depth : " << iter->d << endl;
 
-    // insertCandidate(iter);
+//     // insertCandidate(iter);
 
-    // cout << "Solution apres insertion : " << endl;
+//     // cout << "Solution apres insertion : " << endl;
 
-    // printSolution();
+//     // printSolution();
 
-    // cout << "Candidats apres insertion : " << endl;
+//     // cout << "Candidats apres insertion : " << endl;
 
-    // printCandidates();
+//     // printCandidates();
 
-    // decrementTaboo();
+//     // decrementTaboo();
 
-    // printTaboo();
+//     // printTaboo();
 
-    // copyS();
+//     // copyS();
 
-    // printSolutionStar();
+//     // printSolutionStar();
 
-    return 0;
-}
+//     return 0;
+// }

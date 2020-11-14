@@ -20,7 +20,7 @@ int compare (const void *a, const void * b)
 
 /* Returns the height of the tallest stack that can be 
    formed with give type of boxes */
-int maxStackHeight(  ) 
+int maxStackHeight( int n ) 
 { 
    /* Create an array of all rotations of given boxes 
       For example, for a box {1, 2, 3}, we consider three 
@@ -28,7 +28,7 @@ int maxStackHeight(  )
    int index = 0; 
   
    // Now the number of boxes is 3n 
-   int n = sizeof(rot); 
+   n = 3*n; 
   
    /* Sort the array 'rot[]' in non-increasing order 
       of base area */

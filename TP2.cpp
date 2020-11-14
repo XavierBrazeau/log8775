@@ -14,6 +14,7 @@
 
 #include "./dynamic.cpp"
 #include "./taboo.cpp"
+#include "./glouton.cpp"
 
 #ifdef WINDOWS
 #include <direct.h>
@@ -37,17 +38,17 @@ string getCurrentDirectory(){
         
 }
 
-void initializeBlocks(string filePath){
+void initializeBlocks(int fileNumber){
     
-    // string currentDirectory = getCurrentDirectory() + "/b" + to_string(NUMBER_OF_BLOCKS);
+    string currentDirectory = getCurrentDirectory() + "/b" + to_string(NUMBER_OF_BLOCKS);
     
-    // string currentFile = currentDirectory + "_" + to_string(fileNumber) + ".txt";
+    string currentFile = currentDirectory + "_" + to_string(fileNumber) + ".txt";
     
     ifstream file;
 
-    file.open(filePath);
+    file.open(currentFile);
     if (!file) {
-        cerr << "Unable to open file : " << filePath << endl;
+        cerr << "Unable to open file : " << currentFile << endl;
         exit(1);   // call system to stop
     }else {
         int x; 
@@ -75,6 +76,8 @@ void initializeBlocks(string filePath){
 
 int main(int argc, char *argv[])
 {   
+  
+
     struct {
         std::string algo = "";
         std::string file_path = "";
@@ -94,15 +97,15 @@ int main(int argc, char *argv[])
             prog_args.print_time = true;
         }
     }
-    initializeBlocks(prog_args.file_path);
+    initializeBlocks(2);
 
     auto start = high_resolution_clock::now(); 
 
     if(prog_args.algo == "taboo"){
         tabooSearch();
-    }else if(prog_args.algo == "glouton"){
-        
-    }else if(prog_args.algo == "dynamique"){
+    }else if(prog_args.algo == "vorace"){
+        heightGlouton();
+    }else if(prog_args.algo == "progdyn"){
         maxStackHeight(NUMBER_OF_BLOCKS);
     }else {
         cout << "choix d'algorithme invalide" << endl;
@@ -115,7 +118,7 @@ int main(int argc, char *argv[])
     auto duration = duration_cast<microseconds>(stop - start);
 
     if(prog_args.print_time){
-        cout << duration.count();
+        cout << endl << duration.count() <<endl;
     }
 
 
