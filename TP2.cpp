@@ -37,17 +37,17 @@ string getCurrentDirectory(){
         
 }
 
-void initializeBlocks(int fileNumber){
+void initializeBlocks(string filePath){
     
-    string currentDirectory = getCurrentDirectory() + "/b" + to_string(NUMBER_OF_BLOCKS);
+    // string currentDirectory = getCurrentDirectory() + "/b" + to_string(NUMBER_OF_BLOCKS);
     
-    string currentFile = currentDirectory + "_" + to_string(fileNumber) + ".txt";
+    // string currentFile = currentDirectory + "_" + to_string(fileNumber) + ".txt";
     
     ifstream file;
 
-    file.open(currentFile);
+    file.open(filePath);
     if (!file) {
-        cerr << "Unable to open file : " << currentFile << endl;
+        cerr << "Unable to open file : " << filePath << endl;
         exit(1);   // call system to stop
     }else {
         int x; 
@@ -75,17 +75,49 @@ void initializeBlocks(int fileNumber){
 
 int main(int argc, char *argv[])
 {   
-    initializeBlocks(2);
+    struct {
+        std::string algo = "";
+        std::string file_path = "";
+        bool print_res = false;
+        bool print_time = false;
+    } prog_args;
 
-    for (int i = 0; i < NUMBER_OF_BLOCKS; i++){
+    for (int i=1; i<argc; i++) {
+        std::string arg(argv[i]);
+        if (arg == "-a") {
+            prog_args.algo = argv[i+1]; i++;
+        } else if (arg == "-e") {
+            prog_args.file_path = argv[i+1]; i++;
+        } else if (arg == "-p") {
+            prog_args.print_res = true;
+        } else if (arg == "-t") {
+            prog_args.print_time = true;
+        }
+    }
+    initializeBlocks(prog_args.file_path);
 
-        cout << rot[i].h << "  " << rot[i].w << "   " << rot[i].d << endl;
+    auto start = high_resolution_clock::now(); 
 
+    if(prog_args.algo == "taboo"){
+        tabooSearch();
+    }else if(prog_args.algo == "glouton"){
+        
+    }else if(prog_args.algo == "dynamique"){
+        maxStackHeight(NUMBER_OF_BLOCKS);
+    }else {
+        cout << "choix d'algorithme invalide" << endl;
+        exit(1);
     }
 
+    auto stop = high_resolution_clock::now(); 
 
-    printf("The maximum possible height of stack is %d\n", 
-         maxStackHeight (NUMBER_OF_BLOCKS) );
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    if(prog_args.print_time){
+        cout << duration.count();
+    }
+
 
     return 0;
 }

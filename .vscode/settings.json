@@ -48,6 +48,10 @@
         "string": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "forward_list": "cpp",
+        "bitset": "cpp"
     }
 }

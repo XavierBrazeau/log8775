@@ -4,6 +4,6 @@ struct Box {
     int d;
 };
 
-const int NUMBER_OF_BLOCKS = 100;
+const int NUMBER_OF_BLOCKS = 500;
 
-// Box rot[NUMBER_OF_BLOCKS*3];
+Box rot[NUMBER_OF_BLOCKS*3];
